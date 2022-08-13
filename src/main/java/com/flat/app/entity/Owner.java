@@ -1,4 +1,4 @@
-package com.flat.registration.model;
+package com.flat.app.entity;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -8,22 +8,31 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
-@AllArgsConstructor
+@Builder
 @NoArgsConstructor
+@AllArgsConstructor
+
 @Entity
-@Table(name="Flat_Storey")
-public class Storey {
-	
+@Table(name = "flat_owner")
+public class Owner {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="Flat_Storey", length=4)
-	private int storeyNumber;
-	
-	@Column(name="FlatNumber", length=8)
-	private FlatNumber flatNumber;
+	@Column(name = "owner_id")
+	private Long ownerId;
+
+	@Column(name = "owner_name")
+	private String ownerName;
+
+	@Column(name = "owner_email")
+	private String ownerEmail;
+
+	@Column(name = "phone_number")
+	private Long phoneNumber;
 
 }

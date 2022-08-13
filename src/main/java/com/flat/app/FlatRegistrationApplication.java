@@ -1,13 +1,13 @@
-package com.flat.registration;
+package com.flat.app;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class FlatregistrationApplication {
+public class FlatRegistrationApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(FlatregistrationApplication.class, args);
+		SpringApplication.run(FlatRegistrationApplication.class, args);
 	}
 
 }
