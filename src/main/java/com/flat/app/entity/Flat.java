@@ -1,10 +1,13 @@
 package com.flat.app.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
@@ -31,5 +34,9 @@ public class Flat {
 
 	@Column(name = "living_status")
 	private Boolean livingStatus;
+	
+	@ManyToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name="owner_id", referencedColumnName = "owner_id")
+	private Owner owner; 
 
 }
