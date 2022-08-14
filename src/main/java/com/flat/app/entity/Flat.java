@@ -1,6 +1,5 @@
 package com.flat.app.entity;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonBackReference;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -34,9 +35,10 @@ public class Flat {
 
 	@Column(name = "living_status")
 	private Boolean livingStatus;
-	
-	@ManyToOne(cascade = CascadeType.ALL)
-	@JoinColumn(name="owner_id", referencedColumnName = "owner_id")
-	private Owner owner; 
+
+	@ManyToOne
+	@JsonBackReference
+	@JoinColumn(name = "owner_id", referencedColumnName = "owner_id")
+	private Owner owner;
 
 }

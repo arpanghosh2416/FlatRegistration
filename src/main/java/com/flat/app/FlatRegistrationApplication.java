@@ -1,8 +1,5 @@
 package com.flat.app;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +7,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.flat.app.entity.Flat;
-import com.flat.app.entity.Owner;
 import com.flat.app.repository.FlatRepository;
 import com.flat.app.repository.OwnerRepository;
 
@@ -32,26 +28,30 @@ public class FlatRegistrationApplication {
 		Flat flat1 = new Flat(null, 101L, false, null);
 		Flat flat2 = new Flat(null, 101L, false, null);
 		Flat flat3 = new Flat(null, 101L, false, null);
+
 		flatRepository.save(flat1);
 		flatRepository.save(flat2);
 		flatRepository.save(flat3);
+		System.out.println("--- 3 Flats are saved ---");
 
-		List<Flat> flats1 = new ArrayList<Flat>();
-		List<Flat> flats2 = new ArrayList<Flat>();
-
-		flats1.add(flat1);
-		flats2.add(flat2);
-		flats2.add(flat3);
-
-		Owner owner1 = new Owner(null, "A", "aa@email", 12345L, flats1);
-		Owner owner2 = new Owner(null, "B", "bb@email", 67891L, flats2);
-
-		owner1.getFlats().get(0).setLivingStatus(true);
-		owner2.getFlats().get(0).setLivingStatus(true);
-		owner2.getFlats().get(1).setLivingStatus(true);
-
-		ownerRepository.save(owner1);
-		ownerRepository.save(owner2);
-
+//		Owner owner1 = new Owner(null, "A", "a@gmail.com", 12345L, null);
+//		Owner owner2 = new Owner(null, "B", "b@gmail.com", 67890L, null);
+//
+//		ownerRepository.save(owner1);
+//		ownerRepository.save(owner2);
+//		System.out.println("--- 2 owners are saved ---");
+//
+//		flat1.setOwner(owner1);
+//		flat1.setLivingStatus(true);
+//		flat2.setOwner(owner2);
+//		flat2.setLivingStatus(true);
+//		flat3.setOwner(owner2);
+//		flat3.setLivingStatus(true);
+//
+//		flatRepository.save(flat1);
+//		flatRepository.save(flat2);
+//		flatRepository.save(flat3);
+//		System.out.println("--- Relationship mapped ---");
 	}
+
 }

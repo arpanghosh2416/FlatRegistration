@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -38,9 +40,9 @@ public class Owner {
 
 	@Column(name = "phone_number")
 	private Long phoneNumber;
-	
+
+	@JsonManagedReference
 	@OneToMany(cascade = CascadeType.ALL, mappedBy = "owner")
 	private List<Flat> flats;
-	
 
 }
