@@ -61,7 +61,7 @@ public class JwtController {
 		User user = userService.getUserById(username);
 		String jwt = jwtUtil.generateToken(userDetails);
 		System.out.println("----- JWT: " + jwt + " -----");
-		return ResponseEntity.status(201).body(JwtResponse.builder().user(user).jwt(jwt));
+		return ResponseEntity.status(201).body(JwtResponse.builder().user(user).jwt(jwt).build());
 	}
 
 }

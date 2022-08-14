@@ -3,6 +3,7 @@ package com.flat.app.serviceimpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.flat.app.entity.User;
 import com.flat.app.exception.NoUsersFoundException;
@@ -10,6 +11,7 @@ import com.flat.app.exception.UserNotFoundException;
 import com.flat.app.repository.UserRepository;
 import com.flat.app.service.UserService;
 
+@Service
 public class UserServiceImpl implements UserService {
 
 	@Autowired
@@ -27,6 +29,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User registerUser(User user) {
+		user.setUserRole("ROLE_" + user.getUserRole());
 		User _user = userRepository.save(user);
 		return _user;
 	}
