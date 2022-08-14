@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import com.flat.app.exception.FlatNotFoundException;
 import com.flat.app.exception.FlatRegisteredException;
 import com.flat.app.exception.NoFlatsFoundException;
-import com.flat.app.exception.NoOwnersFoundException;
+import com.flat.app.exception.NoUsersFoundException;
 
 @RestControllerAdvice
 public class APIExceptionHandler {
@@ -45,9 +45,9 @@ public class APIExceptionHandler {
 		return errorMap;
 	}
 
-	@ExceptionHandler(NoOwnersFoundException.class)
+	@ExceptionHandler(NoUsersFoundException.class)
 	@ResponseStatus(value = HttpStatus.INTERNAL_SERVER_ERROR)
-	public Map<String, Object> handleNoOwnersFound(NoOwnersFoundException exception) {
+	public Map<String, Object> handleNoOwnersFound(NoUsersFoundException exception) {
 		Map<String, Object> errorMap = new LinkedHashMap<>();
 
 		errorMap.put("statusCode", 500);

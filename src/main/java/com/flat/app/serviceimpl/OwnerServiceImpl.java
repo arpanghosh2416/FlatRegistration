@@ -9,7 +9,7 @@ import com.flat.app.entity.Flat;
 import com.flat.app.entity.Owner;
 import com.flat.app.exception.FlatNotFoundException;
 import com.flat.app.exception.FlatRegisteredException;
-import com.flat.app.exception.NoOwnersFoundException;
+import com.flat.app.exception.NoUsersFoundException;
 import com.flat.app.repository.FlatRepository;
 import com.flat.app.repository.OwnerRepository;
 import com.flat.app.service.FlatService;
@@ -28,13 +28,13 @@ public class OwnerServiceImpl implements OwnerService {
 	private OwnerRepository ownerRepository;
 
 	@Override
-	public List<Owner> getAllOwners() throws NoOwnersFoundException {
+	public List<Owner> getAllOwners() throws NoUsersFoundException {
 		List<Owner> owners = ownerRepository.findAll();
 
 		if (owners.size() > 0)
 			return owners;
 
-		throw new NoOwnersFoundException("No owners exist till now");
+		throw new NoUsersFoundException("No owners exist till now");
 	}
 
 	@Override

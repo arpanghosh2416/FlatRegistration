@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.flat.app.entity.Owner;
 import com.flat.app.exception.FlatNotFoundException;
 import com.flat.app.exception.FlatRegisteredException;
-import com.flat.app.exception.NoOwnersFoundException;
+import com.flat.app.exception.NoUsersFoundException;
 import com.flat.app.service.OwnerService;
 
 @RestController
@@ -34,7 +34,7 @@ public class OwnerController {
 	}
 
 	@GetMapping("/get-all-owners")
-	public ResponseEntity<?> getAllOwners() throws NoOwnersFoundException {
+	public ResponseEntity<?> getAllOwners() throws NoUsersFoundException {
 		List<Owner> owners = ownerService.getAllOwners();
 		return ResponseEntity.ok(owners);
 	}
