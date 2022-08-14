@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.flat.app.entity.Flat;
+import com.flat.app.exception.FlatNotFoundException;
+import com.flat.app.exception.NoFlatsFoundException;
 import com.flat.app.repository.FlatRepository;
 import com.flat.app.service.FlatService;
 
@@ -16,9 +18,13 @@ public class FlatServiceImpl implements FlatService {
 	private FlatRepository flatRepository;
 
 	@Override
-	public List<Flat> getAllFlats() {
+	public List<Flat> getAllFlats() throws NoFlatsFoundException {
 		List<Flat> flats = flatRepository.findAll();
-		return flats;
+
+		if (flats.size() > 0)
+			return flats;
+
+		throw new NoFlatsFoundException("No flats exist till now");
 	}
 
 	@Override
@@ -28,8 +34,9 @@ public class FlatServiceImpl implements FlatService {
 	}
 
 	@Override
-	public Flat getFlatById(Long flatId) {
-		Flat flat = flatRepository.findById(flatId).orElse(null);
+	public Flat getFlatById(Long flatId) throws FlatNotFoundException {
+		Flat flat = flatRepository.findById(flatId)
+				.orElseThrow(() -> new FlatNotFoundException("No flat found with id: " + flatId));
 		return flat;
 	}
 

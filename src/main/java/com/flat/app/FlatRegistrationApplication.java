@@ -1,7 +1,5 @@
 package com.flat.app;
 
-import javax.annotation.PostConstruct;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -22,7 +20,7 @@ public class FlatRegistrationApplication {
 		SpringApplication.run(FlatRegistrationApplication.class, args);
 	}
 
-	@PostConstruct
+//	@PostConstruct
 	public void dummy() {
 		Flat flat1 = Flat.builder().storeyNumber(101L).livingStatus(false).build();
 		Flat flat2 = Flat.builder().storeyNumber(101L).livingStatus(false).build();

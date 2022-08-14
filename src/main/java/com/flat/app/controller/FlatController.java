@@ -2,6 +2,8 @@ package com.flat.app.controller;
 
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flat.app.entity.Flat;
+import com.flat.app.exception.NoFlatsFoundException;
 import com.flat.app.service.FlatService;
 
 @RestController
@@ -29,13 +32,13 @@ public class FlatController {
 	}
 
 	@GetMapping("/get-all-flats")
-	public ResponseEntity<?> getAllFlats() {
+	public ResponseEntity<?> getAllFlats() throws NoFlatsFoundException {
 		List<Flat> flats = flatService.getAllFlats();
 		return ResponseEntity.ok(flats);
 	}
 
 	@PostMapping("/create-flat")
-	public ResponseEntity<?> createFlat(@RequestBody Flat flat) {
+	public ResponseEntity<?> createFlat(@RequestBody @Valid Flat flat) {
 		Flat _flat = flatService.createFlat(flat);
 		return ResponseEntity.status(201).body(_flat);
 	}
