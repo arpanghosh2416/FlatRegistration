@@ -8,26 +8,26 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.flat.app.entity.Owner;
+import com.flat.app.entity.Flat;
 
 @RestController
 @CrossOrigin(origins = "*")
-@RequestMapping("/api/owner")
-public class OwnerController {
+@RequestMapping("/api/flat")
+public class FlatController {
 
 	@GetMapping("/")
 	public String test() {
-		String msg = "Owner-REST-API server is running";
+		String msg = "Flat-REST-API server is running";
 		return msg;
 	}
 
-	@GetMapping("/get-all-owners")
-	public ResponseEntity<?> getAllOwners() {
+	@GetMapping("/get-all-flats")
+	public ResponseEntity<?> getAllFlats() {
 		return null;
 	}
 
-	@PostMapping("/register-flat")
-	public ResponseEntity<?> createOwner(@RequestBody Owner owner) {
+	@PostMapping("/create-flat")
+	public ResponseEntity<?> createFlat(@RequestBody Flat flat) {
 		return null;
 	}
 

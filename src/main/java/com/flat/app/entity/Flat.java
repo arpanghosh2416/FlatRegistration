@@ -1,5 +1,6 @@
 package com.flat.app.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +9,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -31,13 +33,15 @@ public class Flat {
 	private Long flatId;
 
 	@Column(name = "storey_number")
+	@NotNull(message = "Every flat should have a storey number")
 	private Long storeyNumber;
 
 	@Column(name = "living_status")
+	@NotNull(message = "Living status should be true or false")
 	private Boolean livingStatus;
 
-	@ManyToOne
 	@JsonBackReference
+	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "owner_id", referencedColumnName = "owner_id")
 	private Owner owner;
 

@@ -1,5 +1,8 @@
 package com.flat.app;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +10,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import com.flat.app.entity.Flat;
+import com.flat.app.entity.Owner;
 import com.flat.app.repository.FlatRepository;
 import com.flat.app.repository.OwnerRepository;
 
@@ -25,33 +29,40 @@ public class FlatRegistrationApplication {
 
 	@PostConstruct
 	public void dummy() {
-		Flat flat1 = new Flat(null, 101L, false, null);
-		Flat flat2 = new Flat(null, 101L, false, null);
-		Flat flat3 = new Flat(null, 101L, false, null);
+		Flat flat1 = Flat.builder().storeyNumber(101L).livingStatus(false).build();
+		Flat flat2 = Flat.builder().storeyNumber(101L).livingStatus(false).build();
+		Flat flat3 = Flat.builder().storeyNumber(101L).livingStatus(false).build();
 
 		flatRepository.save(flat1);
 		flatRepository.save(flat2);
 		flatRepository.save(flat3);
 		System.out.println("--- 3 Flats are saved ---");
 
-//		Owner owner1 = new Owner(null, "A", "a@gmail.com", 12345L, null);
-//		Owner owner2 = new Owner(null, "B", "b@gmail.com", 67890L, null);
-//
-//		ownerRepository.save(owner1);
-//		ownerRepository.save(owner2);
-//		System.out.println("--- 2 owners are saved ---");
-//
-//		flat1.setOwner(owner1);
-//		flat1.setLivingStatus(true);
-//		flat2.setOwner(owner2);
-//		flat2.setLivingStatus(true);
-//		flat3.setOwner(owner2);
-//		flat3.setLivingStatus(true);
-//
-//		flatRepository.save(flat1);
-//		flatRepository.save(flat2);
-//		flatRepository.save(flat3);
-//		System.out.println("--- Relationship mapped ---");
+		List<Flat> flats1 = new ArrayList<Flat>();
+		List<Flat> flats2 = new ArrayList<Flat>();
+		flats1.add(flat1);
+		flats2.add(flat2);
+		flats2.add(flat3);
+
+		Owner owner1 = Owner.builder().ownerName("aaa").ownerEmail("a@gmail.com").phoneNumber("1234567890").build();
+		Owner owner2 = Owner.builder().ownerName("bbb").ownerEmail("b@gmail.com").phoneNumber("1234567891").build();
+
+		ownerRepository.save(owner1);
+		ownerRepository.save(owner2);
+
+		flats1.forEach(e -> {
+			e.setOwner(owner1);
+			e.setLivingStatus(true);
+		});
+
+		flats2.forEach(e -> {
+			e.setOwner(owner2);
+			e.setLivingStatus(true);
+		});
+
+		flatRepository.saveAll(flats1);
+		flatRepository.saveAll(flats2);
+		System.out.println("--- 2 owners are saved ---");
 	}
 
 }
