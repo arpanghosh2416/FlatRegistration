@@ -5,12 +5,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.flat.app.entity.Flat;
 import com.flat.app.entity.Owner;
+import com.flat.app.repository.FlatRepository;
 import com.flat.app.repository.OwnerRepository;
 import com.flat.app.service.OwnerService;
 
 @Service
 public class OwnerServiceImpl implements OwnerService {
+
+	@Autowired
+	private FlatRepository flatRepository;
 
 	@Autowired
 	private OwnerRepository ownerRepository;
@@ -23,7 +28,14 @@ public class OwnerServiceImpl implements OwnerService {
 
 	@Override
 	public Owner createOwner(Owner owner) {
+		List<Flat> flats = owner.getFlats();
+		owner.setFlats(null);
 		Owner _owner = ownerRepository.save(owner);
+
+		flats.forEach(e -> e.setOwner(_owner));
+		flatRepository.saveAll(flats);
+
+		_owner.setFlats(flats);
 		return _owner;
 	}
 
