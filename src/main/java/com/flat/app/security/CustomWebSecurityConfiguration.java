@@ -3,6 +3,7 @@ package com.flat.app.security;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -41,10 +42,11 @@ public class CustomWebSecurityConfiguration extends WebSecurityConfigurerAdapter
 			.headers().frameOptions().sameOrigin();
 
 		http
-			.cors().disable()
+			.cors().and()
 			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/", "/api/flat/", "/api/owner/", "/h2db/**", "/api/user/**").permitAll()
+			.antMatchers(HttpHeaders.ALLOW).permitAll()
+			.antMatchers("/", "/api/flat/", "/api/flat/get-all-flats", "/api/owner/", "/h2db/**", "/api/user/**").permitAll()
 			.anyRequest().authenticated();
 
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint);
