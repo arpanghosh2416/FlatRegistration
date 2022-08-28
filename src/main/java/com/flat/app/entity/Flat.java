@@ -29,7 +29,7 @@ import lombok.NoArgsConstructor;
 public class Flat {
 
 	@Id
-	@GenericGenerator(name = "flat_id_generator", strategy = "com.flat.app.generator.IdGenerator")
+	@GenericGenerator(name = "flat_id_generator", strategy = "com.flat.app.generator.FlatIdGenerator")
 	@GeneratedValue(generator = "flat_id_generator")
 	@Column(name = "flat_id")
 	private Long flatId;

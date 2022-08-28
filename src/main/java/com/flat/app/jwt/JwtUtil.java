@@ -16,7 +16,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtUtil {
 
 	private static final String SECRET_KEY = "amitava";
-	private static final Long JWT_VALIDITY = 1 * 1 * 5 * 60 * 1000 * 1L;
+	private static final Long JWT_VALIDITY = 7 * 24 * 1440 * 60 * 1000 * 1L;
 
 	public String extractUsername(String token) {
 		return extractClaim(token, Claims::getSubject);
@@ -45,9 +45,7 @@ public class JwtUtil {
 	}
 
 	private String createToken(Map<String, Object> claims, String subject) {
-		return Jwts.builder()
-				.setClaims(claims).setSubject(subject)
-				.setIssuedAt(new Date(System.currentTimeMillis()))
+		return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
 				.setExpiration(new Date(System.currentTimeMillis() + JWT_VALIDITY))
 				.signWith(SignatureAlgorithm.HS256, SECRET_KEY).compact();
 	}
