@@ -44,7 +44,7 @@ public class CustomWebSecurityConfiguration extends WebSecurityConfigurerAdapter
 			.cors().disable()
 			.csrf().disable()
 			.authorizeRequests()
-			.antMatchers("/api/flat/", "/api/owner/", "/h2db/**", "/api/user/**").permitAll()
+			.antMatchers("/", "/api/flat/", "/api/owner/", "/h2db/**", "/api/user/**").permitAll()
 			.anyRequest().authenticated();
 
 		http.exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint);
