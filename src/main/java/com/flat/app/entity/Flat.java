@@ -4,12 +4,13 @@ import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
+
+import org.hibernate.annotations.GenericGenerator;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 
@@ -28,7 +29,8 @@ import lombok.NoArgsConstructor;
 public class Flat {
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
+	@GenericGenerator(name = "flat_id_generator", strategy = "com.flat.app.generator.IdGenerator")
+	@GeneratedValue(generator = "flat_id_generator")
 	@Column(name = "flat_id")
 	private Long flatId;
 
