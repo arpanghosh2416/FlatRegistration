@@ -23,7 +23,7 @@ public class FlatRegistrationApplication {
 	public void dummy() {
 		for (int i = 1; i <= 4; i++) {
 			for (int j = 1; j <= 6; j++) {
-				Flat flat = Flat.builder().storeyNumber((long) i).livingStatus(false).build();
+				Flat flat = Flat.builder().storeyNumber((long) i).price(240000L).livingStatus(false).build();
 				flatRepository.save(flat);
 			}
 		}

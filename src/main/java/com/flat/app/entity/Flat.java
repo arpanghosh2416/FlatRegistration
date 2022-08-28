@@ -42,6 +42,8 @@ public class Flat {
 	@NotNull(message = "Living status should be true or false")
 	private Boolean livingStatus;
 
+	private Long price;
+
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "owner_id", referencedColumnName = "owner_id")
