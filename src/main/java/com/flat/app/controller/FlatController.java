@@ -8,12 +8,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.flat.app.entity.Flat;
+import com.flat.app.exception.FlatNotFoundException;
 import com.flat.app.exception.NoFlatsFoundException;
 import com.flat.app.service.FlatService;
 
@@ -29,6 +31,12 @@ public class FlatController {
 	public String test() {
 		String msg = "Flat-REST-API server is running";
 		return msg;
+	}
+
+	@GetMapping("/get-flat/{id}")
+	public ResponseEntity<?> getFlatById(@PathVariable("id") Long flatId) throws FlatNotFoundException {
+		Flat flat = flatService.getFlatById(flatId);
+		return ResponseEntity.ok(flat);
 	}
 
 	@GetMapping("/get-all-flats")

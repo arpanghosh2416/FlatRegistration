@@ -40,9 +40,12 @@ public class Flat {
 
 	@Column(name = "living_status")
 	@NotNull(message = "Living status should be true or false")
-	private Boolean livingStatus;
+	private boolean livingStatus;
 
 	private Long price;
+
+	@Column(name = "sold_out")
+	private boolean soldOut;
 
 	@JsonBackReference
 	@ManyToOne(cascade = CascadeType.ALL)

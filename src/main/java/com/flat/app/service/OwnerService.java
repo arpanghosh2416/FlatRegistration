@@ -13,7 +13,10 @@ public interface OwnerService {
 
 	public Owner createOwner(Owner owner) throws FlatRegisteredException, FlatNotFoundException;
 
-	public Owner getOwnerById(Long ownerId);
+	public Owner getOwnerById(Long ownerId) throws NoUsersFoundException;
+
+	public Owner updateOwner(Long ownerId, Owner owner)
+			throws FlatRegisteredException, FlatNotFoundException, NoUsersFoundException;
 
 	public Owner getOwnerByOwnerEmail(String ownerEmail);
 

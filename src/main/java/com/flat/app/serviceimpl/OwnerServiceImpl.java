@@ -61,8 +61,21 @@ public class OwnerServiceImpl implements OwnerService {
 	}
 
 	@Override
-	public Owner getOwnerById(Long ownerId) {
+	public Owner updateOwner(Long ownerId, Owner owner)
+			throws FlatRegisteredException, FlatNotFoundException, NoUsersFoundException {
+		Owner _owner = this.getOwnerById(ownerId);
+
+		_owner.setFlats(owner.getFlats());
+		return this.createOwner(_owner);
+	}
+
+	@Override
+	public Owner getOwnerById(Long ownerId) throws NoUsersFoundException {
 		Owner owner = ownerRepository.findById(ownerId).orElse(null);
+
+		if (owner == null)
+			throw new NoUsersFoundException("No owner found with id: " + ownerId);
+
 		return owner;
 	}
 

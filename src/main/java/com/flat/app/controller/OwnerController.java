@@ -8,7 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -39,10 +41,23 @@ public class OwnerController {
 		return ResponseEntity.ok(owners);
 	}
 
+	@GetMapping("/get-owner/{id}")
+	public ResponseEntity<?> getOwnerById(@PathVariable("id") Long ownerId) throws NoUsersFoundException {
+		Owner owner = ownerService.getOwnerById(ownerId);
+		return ResponseEntity.ok(owner);
+	}
+
 	@PostMapping("/register-flat")
 	public ResponseEntity<?> createOwner(@RequestBody @Valid Owner owner)
 			throws FlatRegisteredException, FlatNotFoundException {
 		Owner _owner = ownerService.createOwner(owner);
+		return ResponseEntity.status(201).body(_owner);
+	}
+
+	@PutMapping("/register-flat/{id}")
+	public ResponseEntity<?> updateOwner(@PathVariable("id") Long ownerId, @RequestBody @Valid Owner owner)
+			throws FlatRegisteredException, FlatNotFoundException, NoUsersFoundException {
+		Owner _owner = ownerService.updateOwner(ownerId, owner);
 		return ResponseEntity.status(201).body(_owner);
 	}
 
